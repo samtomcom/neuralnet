@@ -29,17 +29,24 @@ class NeuralNet
   def activate inputs
     if @activate == :binary
       return activate_binary(inputs)
+    elsif @activate == :halftanh
+      return activate_halftanh(inputs)
     elsif @activate == :tanh
       return activate_tanh(inputs)
-    # just the values
     else
+      # just the values
       return inputs
     end
   end
 
+  # activation via 0.5*tanh()+0.5
+  def activate_halftanh matrix
+    return matrix.map! { |x| 0.5 * Math.tanh(x) + 0.5 }
+  end
+
   # activation via tanh()
   def activate_tanh matrix
-    return matrix.map! { |x| 0.5 * Math.tanh(x) + 0.5 }
+    return matrix.map! { |x| Math.tanh(x) }
   end
 
   # 0 if <0; 1 otherwise
