@@ -13,11 +13,17 @@ class NeuralNet
 
   # do MATRIX(inputs)*MATRIX(weights), optional bias, activation function
   def output inputs
-    (0...(@size.size - 1)).each do |layer|
+    (@size.size - 1).times do |layer|
       inputs = (Matrix.row_vector(inputs) * Matrix.rows(@weights[layer])).to_a[0]
       inputs = activate(bias(inputs, layer))
     end
     return inputs
+  end
+
+  # 'breed' two networks together
+  def breed parent
+    genes = [@weights, @biases]
+    @weights.each
   end
 
   private
