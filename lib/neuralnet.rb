@@ -7,7 +7,7 @@ class NeuralNet
     calc_size()
   end
 
-  # do MATRIX(inputs)*MATRIX(weights), optional bias, activation function
+  # Calculate the final output of the NN
   def output inputs
     (@size.size - 1).times do |layer|
       inputs = (Matrix.row_vector(inputs) * Matrix.rows(@weights[layer])).to_a[0]
